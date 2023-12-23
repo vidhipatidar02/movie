@@ -32,6 +32,7 @@ interface Movie {
   Country: string;
   Awards: string;
   Actors: string;
+  imdbID: string;
 }
 const MoviePage = () => {
   const [movie, setMovie] = useState<Movie[]>([]);
@@ -42,7 +43,7 @@ const MoviePage = () => {
   const handleButtonClick = async () => {
     try {
       const response = await axios.get(
-        `http://www.omdbapi.com/?t=${searchValue}&apikey=55452302`
+        `https://www.omdbapi.com/?t=${searchValue}&apikey=55452302`
       );
       if (response?.data) {
         const responseData = Array.isArray(response.data)
@@ -131,137 +132,60 @@ const MoviePage = () => {
             Search
           </Button>
         </Paper>
-        <Box sx={{ my: 5 }}>
-          {movie && movie.length > 0
-            ? movie.map((element) => {
-                return element.Title ? (
-                  <>
-                    <Card sx={{ maxWidth: 350 }}>
-                      <CardHeader
-                        avatar={
-                          <Avatar alt="Remy Sharp" src={element.Poster} />
-                        }
-                        title={element.Title}
-                        subheader={element.Released}
+        {movie && movie.length > 0
+          ? movie.map((element) => {
+              return element.Title ? (
+                <Box key={element.imdbID} sx={{ my: 5 }}>
+                  <Card sx={{ maxWidth: 350 }}>
+                    <CardHeader
+                      avatar={<Avatar alt="Remy Sharp" src={element.Poster} />}
+                      title={element.Title}
+                      subheader={element.Released}
+                    />
+                    <CardMedia>
+                      <Image
+                        src={element.Poster}
+                        alt={element.Title}
+                        width={370}
+                        height={300}
                       />
-                      <CardMedia>
-                        <Image
-                          src={element.Poster}
-                          alt={element.Title}
-                          width={370}
-                          height={300}
-                        />
-                      </CardMedia>
-                      <CardContent>
-                        <Typography variant="body2">
-                          Director : {element.Director}
-                        </Typography>
-                        <Typography variant="body2">
-                          Writer : {element.Writer}
-                        </Typography>
-                        <Typography variant="body2">
-                          Actors : {element.Actors}
-                        </Typography>
-                        <Typography variant="body2">
-                          Language : {element.Language}
-                        </Typography>
-                        <Typography variant="body2">
-                          Country : {element.Country}
-                        </Typography>
-                        <Typography variant="body2">
-                          Awards : {element.Awards}
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </>
-                ) : (
-                  <Typography variant="body1" sx={{ color: "#fff" }}>
-                    No movies found!
-                  </Typography>
-                );
-              })
-            : null}
-        </Box>
+                    </CardMedia>
+                    <CardContent>
+                      <Typography variant="body2">
+                        Director : {element.Director}
+                      </Typography>
+                      <Typography variant="body2">
+                        Writer : {element.Writer}
+                      </Typography>
+                      <Typography variant="body2">
+                        Actors : {element.Actors}
+                      </Typography>
+                      <Typography variant="body2">
+                        Language : {element.Language}
+                      </Typography>
+                      <Typography variant="body2">
+                        Country : {element.Country}
+                      </Typography>
+                      <Typography variant="body2">
+                        Awards : {element.Awards}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Box>
+              ) : (
+                <Typography
+                  variant="body1"
+                  sx={{ color: "#fff", mt: 3 }}
+                  key="no-movies"
+                >
+                  No movies found!
+                </Typography>
+              );
+            })
+          : null}
       </Stack>
     </Box>
   );
 };
 
 export default MoviePage;
-{
-  /* <Grid container>
-<Grid item lg={3} md={4} sm={6} xs={12}>
-  <Card
-    sx={{
-      position: "relative",
-      maxWidth: 295,
-      borderRadius: "20px",
-    }}
-    className={productStyle.productContainer}
-  >
-    <CardActionArea
-      className={productStyle.productCard}
-      disableTouchRipple={true}
-      sx={{
-        position: "relative",
-        height: "450px",
-        bgcolor: "#232323",
-        borderRadius: "20px",
-        overflow: "hidden",
-        cursor: "context-menu",
-      }}
-    >
-      <CardMedia
-        className={productStyle.productImageBox}
-        sx={{
-          position: "absolute",
-          top: "50%",
-          transform: "translateY(-50%)",
-          width: "100%",
-          height: "0px",
-          transition: "1s",
-        }}
-      >
-        <Image
-          src={element.Poster}
-          alt={element.Title}
-          width={370}
-          height={300}
-        />
-      </CardMedia>
-      <CardContent
-        className={productStyle.productContainBox}
-        sx={{
-          position: "absolute",
-          bottom: 0,
-          width: "100%",
-          height: "100px",
-          textAlign: "center",
-          transition: "1s",
-          zIndex: 10,
-        }}
-      >
-        <Typography variant="body2">
-          Director : {element.Director}
-        </Typography>
-        <Typography variant="body2">
-          Writer : {element.Writer}
-        </Typography>
-        <Typography variant="body2">
-          Actors : {element.Actors}
-        </Typography>
-        <Typography variant="body2">
-          Language : {element.Language}
-        </Typography>
-        <Typography variant="body2">
-          Country : {element.Country}
-        </Typography>
-        <Typography variant="body2">
-          Awards : {element.Awards}
-        </Typography>
-      </CardContent>
-    </CardActionArea>
-  </Card>
-</Grid>
-</Grid> */
-}
