@@ -30,19 +30,25 @@ interface Movie {
   Actors: string;
   imdbID: string;
 }
+const isBrowser = typeof window !== "undefined";
 const MoviePage = () => {
   const [movie, setMovie] = useState<Movie[]>(() => {
-    const storedMovieData = localStorage.getItem("movieData");
-    return storedMovieData ? JSON.parse(storedMovieData) : [];
+    if (isBrowser) {
+      const storedMovieData = localStorage.getItem("movieData");
+      return storedMovieData ? JSON.parse(storedMovieData) : [];
+    }
+    return [];
   });
-  const [searchValue, setSearchValue] = useState(
-    localStorage.getItem("searchValue") || ""
-  );
 
+  const [searchValue, setSearchValue] = useState(
+    isBrowser ? localStorage.getItem("searchValue") || "" : ""
+  );
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSearchValue(value);
-    localStorage.setItem("searchValue", value);
+    if (isBrowser) {
+      localStorage.setItem("searchValue", value);
+    }
   };
   const handleButtonClick = async () => {
     try {
@@ -63,8 +69,10 @@ const MoviePage = () => {
   const handleClearSearch = () => {
     setSearchValue("");
     setMovie([]);
-    localStorage.removeItem("searchValue");
-    localStorage.removeItem("movieData");
+    if (isBrowser) {
+      localStorage.removeItem("searchValue");
+      localStorage.removeItem("movieData");
+    }
   };
   const FooterButton = {
     "&.MuiButton-root": {
