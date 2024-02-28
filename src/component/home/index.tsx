@@ -18,6 +18,7 @@ import {
 import axios from "axios";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
+import { Api } from "./api";
 interface Movie {
   Title: string;
   Poster: any;
@@ -191,6 +192,19 @@ const MoviePage = () => {
                       <Typography variant="body2">
                         Awards : {element.Awards}
                       </Typography>
+                      {/* {Api.map((val) => {
+                        return (
+                          <>
+                            {val.name == searchValue ? (
+                              <Typography variant="body2">
+                                Link : {val.link}
+                              </Typography>
+                            ) : (
+                              <Typography variant="body2">Link : NA</Typography>
+                            )}
+                          </>
+                        );
+                      })} */}
                     </CardContent>
                   </Card>
                 </Box>

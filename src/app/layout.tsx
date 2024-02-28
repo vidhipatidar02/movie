@@ -20,6 +20,10 @@ export default function RootLayout({
           name="google-site-verification"
           content="Tn566Qh34_tVjx3cCTO0-4WRFSspOlQ6JjamnAPOHpY"
         />
+        <meta
+          name="google-adsense-account"
+          content="ca-pub-2095231941147888"
+        ></meta>
       </head>
       <body className={inter.className}>{children}</body>
     </html>
