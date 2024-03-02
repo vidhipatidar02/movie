@@ -11,6 +11,7 @@ const LatestUpdatePage = () => {
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "space-evenly",
+          mb: 4,
         }}
       >
         {Api.map((val) => {
