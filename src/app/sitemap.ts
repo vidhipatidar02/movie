@@ -8,5 +8,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'never',
       priority: 1,
     },
+    {
+      url: 'https://movie-detail-project.vercel.app/LatestUpdate',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
   ]
 }

@@ -1,8 +1,8 @@
 import React from "react";
 import MoviePage from "@/component/home";
 
-const page = () => {
+const Home = () => {
   return <MoviePage />;
 };
 
-export default page;
+export default Home;
