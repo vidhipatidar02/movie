@@ -197,7 +197,7 @@ const MoviePage = () => {
                             <Typography
                               variant="body2"
                               sx={{
-                                textAlign: "center",
+                                textAlign: "start",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
@@ -206,7 +206,7 @@ const MoviePage = () => {
                               {val.name.toLowerCase() ===
                               searchValue.toLowerCase() ? (
                                 <>
-                                  Link: <a href={val.link}>{val.link}</a>
+                                  Link: <a href="/">Click Here</a>
                                 </>
                               ) : (
                                 <>Link: NA</>

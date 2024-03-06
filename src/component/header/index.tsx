@@ -55,7 +55,7 @@ const Header = () => {
                 href="/LatestUpdate"
                 style={{ textDecoration: "none", color: "#fff" }}
               >
-                Latest Movie
+                Latest Films
               </Link>
             </Button>
           </Grid>
